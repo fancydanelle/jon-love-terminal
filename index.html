@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
 
-  <!-- 📱 MOBILE FIX -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>For You ❤️</title>
@@ -70,20 +69,15 @@
 
   <!-- 💖 MAIN CONTENT -->
   <div id="content">
-
-    <div id="randomContent">Click the button below to reveal a one-time-view-message-that-will-self-destruct from me 💖</div>
+    <div id="randomContent">
+      Click the button below to reveal a one-time-view-message-that-will-self-destruct from me 💖
+    </div>
 
     <button onclick="showRandom()">OPEN</button>
   </div>
 
-  <!-- 🧠 SCRIPT -->
   <script>
-    // 💬 First message shown after unlock
-    const surprises = [
-    
-    ];
-
-    // 🌐 Pages for button clicks
+    // 🌐 Pages
     const pages = [
       "page1.html",
       "page2.html",
@@ -107,16 +101,17 @@
       window.location.href = randomPage;
     }
 
-    // ⌨️ PRESS ENTER TO UNLOCK
-    document.getElementById("passcode").addEventListener("keypress", function(event) {
-      if (event.key === "Enter") {
-        checkPass();
-      }
-    });
+    // ✅ Wait until page is fully loaded before adding listeners
+    window.onload = function () {
+      const input = document.getElementById("passcode");
 
-    // 🎯 AUTO-FOCUS INPUT
-    window.onload = function() {
-      document.getElementById("passcode").focus();
+      input.focus();
+
+      input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+          checkPass();
+        }
+      });
     };
   </script>
 
