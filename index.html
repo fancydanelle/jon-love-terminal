@@ -17,7 +17,7 @@
       display: none;
       background-color: #fff0f5;
       color: black;
-      padding: 20px;
+      padding: 25px;
       border-radius: 20px;
       max-width: 400px;
       margin: auto;
@@ -37,12 +37,6 @@
       border: none;
       background-color: #ff69b4;
       color: white;
-    }
-
-    img, video {
-      max-width: 100%;
-      border-radius: 15px;
-      margin-top: 15px;
     }
   </style>
 </head>
@@ -67,7 +61,7 @@
       Tap below whenever you need a reminder that you are loved.
     </p>
 
-    <div id="randomContent"></div>
+    <div id="randomContent">💖 Loading surprise...</div>
 
     <button onclick="showRandom()">Show Surprise 💖</button>
   </div>
@@ -77,9 +71,8 @@
     const surprises = [
       { type: "text", value: "I love you more than yesterday 💌" },
       { type: "text", value: "Thinking about you right now ❤️" },
-      { type: "image", value: "Test photo.JPG" },
-      { type: "audio", value: "TestAudio.m4a" },
-      { type: "video", value: "TestVideo.MOV" }
+      { type: "text", value: "You make my world brighter ✨" },
+      { type: "text", value: "I’m so lucky to have you 💕" }
     ];
 
     function checkPass() {
@@ -99,29 +92,7 @@
       const random = surprises[Math.floor(Math.random() * surprises.length)];
       const container = document.getElementById("randomContent");
 
-      if (random.type === "text") {
-        container.innerHTML = `<p>${random.value}</p>`;
-      }
-
-      if (random.type === "image") {
-        container.innerHTML = `<img src="${random.value}">`;
-      }
-
-      if (random.type === "audio") {
-        container.innerHTML = `
-          <audio controls autoplay>
-            <source src="${random.value}" type="audio/mpeg">
-          </audio>
-        `;
-      }
-
-      if (random.type === "video") {
-        container.innerHTML = `
-          <video controls autoplay>
-            <source src="${random.value}" type="video/mp4">
-          </video>
-        `;
-      }
+      container.innerHTML = `<p>${random.value}</p>`;
     }
   </script>
 
