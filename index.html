@@ -8,9 +8,18 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background-color: #white;
-      color: #black;
+      background-color: white;
+      color: black;
       padding: 40px;
+      margin: 0;
+    }
+
+    #lock {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     #content {
@@ -20,7 +29,7 @@
       padding: 25px;
       border-radius: 20px;
       max-width: 400px;
-      margin: auto;
+      margin: 40px auto;
     }
 
     input {
@@ -63,11 +72,19 @@
 
   <!-- 🧠 SCRIPT -->
   <script>
+    // 💬 First message shown after unlock
     const surprises = [
-      { type: "text", value: "I love you more than yesterday 💌" },
-      { type: "text", value: "Thinking about you right now ❤️" },
-      { type: "text", value: "You make my world brighter ✨" },
-      { type: "text", value: "I’m so lucky to have you 💕" }
+      "I love you more than yesterday 💌",
+      "Thinking about you right now ❤️",
+      "You make my world brighter ✨",
+      "I’m so lucky to have you 💕"
+    ];
+
+    // 🌐 Pages for button clicks
+    const pages = [
+      "page1.html",
+      "page2.html",
+      "page3.html"
     ];
 
     function checkPass() {
@@ -77,17 +94,18 @@
       if (input === correct) {
         document.getElementById("lock").style.display = "none";
         document.getElementById("content").style.display = "block";
-        showRandom();
+
+        // show a random love message first
+        const randomMessage = surprises[Math.floor(Math.random() * surprises.length)];
+        document.getElementById("randomContent").innerHTML = `<p>${randomMessage}</p>`;
       } else {
         document.getElementById("error").innerText = "Wrong passcode 💔";
       }
     }
 
     function showRandom() {
-      const random = surprises[Math.floor(Math.random() * surprises.length)];
-      const container = document.getElementById("randomContent");
-
-      container.innerHTML = `<p>${random.value}</p>`;
+      const randomPage = pages[Math.floor(Math.random() * pages.length)];
+      window.location.href = randomPage;
     }
   </script>
 
