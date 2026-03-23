@@ -98,8 +98,7 @@
         document.getElementById("lock").style.display = "none";
         document.getElementById("content").style.display = "block";
 
-        const randomMessage = surprises[Math.floor(Math.random() * surprises.length)];
-        document.getElementById("randomContent").innerHTML = `<p>${randomMessage}</p>`;
+      
       } else {
         document.getElementById("error").innerText = "Wrong passcode 💔";
       }
