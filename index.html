@@ -36,6 +36,12 @@
       margin: 20px auto;
     }
 
+    #randomContent {
+      margin-bottom: 15px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
     input {
       padding: 10px;
       font-size: 16px;
@@ -45,7 +51,7 @@
 
     button {
       padding: 10px 20px;
-      margin-top: 15px;
+      margin-top: 10px;
       font-size: 16px;
       cursor: pointer;
       border-radius: 10px;
@@ -70,14 +76,13 @@
   <!-- 💖 MAIN CONTENT -->
   <div id="content">
     <div id="randomContent">
-      Click the button below to reveal a one-time-view-message-that-will-self-destruct from me 💖
+      Click to reveal a one-time-view-message-that-will-self-destruct from me 💖
     </div>
 
     <button onclick="showRandom()">OPEN</button>
   </div>
 
   <script>
-    // 🌐 Pages
     const pages = [
       "page1.html",
       "page2.html",
@@ -101,7 +106,6 @@
       window.location.href = randomPage;
     }
 
-    // ✅ Wait until page is fully loaded before adding listeners
     window.onload = function () {
       const input = document.getElementById("passcode");
 
