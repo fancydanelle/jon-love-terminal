@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>For You ❤️</title>
+
   <style>
     body {
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       text-align: center;
       background-color: #000;
       color: #0f0;
@@ -17,6 +19,8 @@
       color: black;
       padding: 20px;
       border-radius: 20px;
+      max-width: 400px;
+      margin: auto;
     }
 
     input {
@@ -26,14 +30,19 @@
 
     button {
       padding: 10px 20px;
-      margin-top: 10px;
+      margin-top: 15px;
       font-size: 16px;
       cursor: pointer;
+      border-radius: 10px;
+      border: none;
+      background-color: #ff69b4;
+      color: white;
     }
 
-    img {
-      max-width: 300px;
-      border-radius: 20px;
+    img, video {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -49,103 +58,72 @@
     <p id="error" style="color:red;"></p>
   </div>
 
-  <!-- 💖 HIDDEN CONTENT -->
- 
-  <div id="content">
-<div id=randomContent"></div>  </div>
-  
+  <!-- 💖 MAIN CONTENT -->
   <div id="content">
     <h1>Hello Love of Mine ❤️</h1>
 
     <p>
       I made this just for you.  
-      Tap this whenever you need a reminder that you are loved.
+      Tap below whenever you need a reminder that you are loved.
     </p>
 
+    <div id="randomContent"></div>
+
+    <button onclick="showRandom()">Show Surprise 💖</button>
   </div>
 
   <!-- 🧠 SCRIPT -->
   <script>
+    const surprises = [
+      { type: "text", value: "I love you more than yesterday 💌" },
+      { type: "text", value: "Thinking about you right now ❤️" },
+      { type: "image", value: "Test photo.JPG" },
+      { type: "audio", value: "TestAudio.m4a" },
+      { type: "video", value: "TestVideo.MOV" }
+    ];
+
     function checkPass() {
-      const correct = "112225"; //
+      const correct = "112225";
       const input = document.getElementById("passcode").value;
 
       if (input === correct) {
         document.getElementById("lock").style.display = "none";
         document.getElementById("content").style.display = "block";
+        showRandom();
       } else {
         document.getElementById("error").innerText = "Wrong passcode 💔";
+      }
+    }
+
+    function showRandom() {
+      const random = surprises[Math.floor(Math.random() * surprises.length)];
+      const container = document.getElementById("randomContent");
+
+      if (random.type === "text") {
+        container.innerHTML = `<p>${random.value}</p>`;
+      }
+
+      if (random.type === "image") {
+        container.innerHTML = `<img src="${random.value}">`;
+      }
+
+      if (random.type === "audio") {
+        container.innerHTML = `
+          <audio controls autoplay>
+            <source src="${random.value}" type="audio/mpeg">
+          </audio>
+        `;
+      }
+
+      if (random.type === "video") {
+        container.innerHTML = `
+          <video controls autoplay>
+            <source src="${random.value}" type="video/mp4">
+          </video>
+        `;
       }
     }
   </script>
 
 </body>
-
-  <script>
-  const surprises = [
-
-    // 💬 TEXT MESSAGE
-    {
-      type: "text",
-      value: "I love you more than yesterday 💌"
-    },
-
-    // 🖼️ PHOTO
-    {
-      type: "image",
-      value: "Test photo.JPG"
-    },
-
-    // 🎧 AUDIO
-    {
-      type: "audio",
-      value: "TestAudio.m4a"
-    },
-
-    // 🎥 VIDEO
-    {
-      type: "video",
-      value: "Test Vidoe.MOV"
-    },
-
-    // 💬 ANOTHER TEXT
-    {
-      type: "text",
-      value: "Thinking about you right now ❤️"
-    }
-
-  ];
-
-  function showRandom() {
-    const random = surprises[Math.floor(Math.random() * surprises.length)];
-    const container = document.getElementById("randomContent");
-
-    if (random.type === "text") {
-      container.innerHTML = `<p>${random.value}</p>`;
-    }
-
-    if (random.type === "image") {
-      container.innerHTML = `<img src="${random.value}" style="max-width:300px;">`;
-    }
-
-    if (random.type === "audio") {
-      container.innerHTML = `
-        <audio controls autoplay>
-          <source src="${random.value}" type="audio/mpeg">
-        </audio>
-      `;
-    }
-
-    if (random.type === "video") {
-      container.innerHTML = `
-        <video width="300" controls autoplay>
-          <source src="${random.value}" type="video/mp4">
-        </video>
-      `;
-    }
-  }
-
-  // Run when page loads
-  showRandom();
-</script>
 </html>
