@@ -56,20 +56,13 @@
   </div>div>
   
   <div id="content">
-    <h1>Hey my love ❤️</h1>
+    <h1>Hello Love of Mine ❤️</h1>
 
     <p>
       I made this just for you.  
       Tap this whenever you need a reminder that you are loved.
     </p>
 
-    <img src="photo.jpg">
-
-    <br><br>
-
-    <audio controls>
-      <source src="voice.mp3" type="audio/mpeg">
-    </audio>
   </div>
 
   <!-- 🧠 SCRIPT -->
@@ -88,4 +81,72 @@
   </script>
 
 </body>
+
+  <script>
+  const surprises = [
+
+    // 💬 TEXT MESSAGE
+    {
+      type: "text",
+      value: "I love you more than yesterday 💌"
+    },
+
+    // 🖼️ PHOTO
+    {
+      type: "image",
+      value: "Test photo.JPG"
+    },
+
+    // 🎧 AUDIO
+    {
+      type: "audio",
+      value: "TestAudio.m4a"
+    },
+
+    // 🎥 VIDEO
+    {
+      type: "video",
+      value: "Test Vidoe.MOV"
+    },
+
+    // 💬 ANOTHER TEXT
+    {
+      type: "text",
+      value: "Thinking about you right now ❤️"
+    }
+
+  ];
+
+  function showRandom() {
+    const random = surprises[Math.floor(Math.random() * surprises.length)];
+    const container = document.getElementById("randomContent");
+
+    if (random.type === "text") {
+      container.innerHTML = `<p>${random.value}</p>`;
+    }
+
+    if (random.type === "image") {
+      container.innerHTML = `<img src="${random.value}" style="max-width:300px;">`;
+    }
+
+    if (random.type === "audio") {
+      container.innerHTML = `
+        <audio controls autoplay>
+          <source src="${random.value}" type="audio/mpeg">
+        </audio>
+      `;
+    }
+
+    if (random.type === "video") {
+      container.innerHTML = `
+        <video width="300" controls autoplay>
+          <source src="${random.value}" type="video/mp4">
+        </video>
+      `;
+    }
+  }
+
+  // Run when page loads
+  showRandom();
+</script>
 </html>
