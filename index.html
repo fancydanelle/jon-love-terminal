@@ -6,35 +6,81 @@
     body {
       font-family: Arial;
       text-align: center;
-      background-color: #fff0f5;
+      background-color: #000;
+      color: #0f0;
       padding: 40px;
     }
+
+    #content {
+      display: none;
+      background-color: #fff0f5;
+      color: black;
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
     img {
       max-width: 300px;
       border-radius: 20px;
-    }
-    audio {
-      margin-top: 20px;
     }
   </style>
 </head>
 
 <body>
 
-  <h1>Hey my love 💌</h1>
+  <!-- 🔒 LOCK SCREEN -->
+  <div id="lock">
+    <h2>Enter Passcode 💌</h2>
+    <input type="password" id="passcode" placeholder="••••">
+    <br>
+    <button onclick="checkPass()">Unlock</button>
+    <p id="error" style="color:red;"></p>
+  </div>
 
-  <p>
-    I made this just for you.  
-    Tap this whenever you need a reminder that you are loved.
-  </p>
+  <!-- 💖 HIDDEN CONTENT -->
+  <div id="content">
+    <h1>Hey my love ❤️</h1>
 
-  <img src="photo.jpg" alt="Us">
+    <p>
+      I made this just for you.  
+      Tap this whenever you need a reminder that you are loved.
+    </p>
 
-  <br>
+    <img src="photo.jpg">
 
-  <audio controls>
-    <source src="voice.mp3" type="audio/mpeg">
-  </audio>
+    <br><br>
+
+    <audio controls>
+      <source src="voice.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <!-- 🧠 SCRIPT -->
+  <script>
+    function checkPass() {
+      const correct = "143"; // 🔑 CHANGE THIS
+      const input = document.getElementById("passcode").value;
+
+      if (input === correct) {
+        document.getElementById("lock").style.display = "none";
+        document.getElementById("content").style.display = "block";
+      } else {
+        document.getElementById("error").innerText = "Wrong passcode 💔";
+      }
+    }
+  </script>
 
 </body>
 </html>
