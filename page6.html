@@ -64,3 +64,17 @@
 
 </body>
 </html>
+<script>
+  const pageName = "page6.html";
+
+  let viewed = JSON.parse(localStorage.getItem("viewedPages")) || [];
+
+  // 🚫 If already viewed → block access
+  if (viewed.includes(pageName)) {
+    document.body.innerHTML = "<h2>This message has already been opened 💔</h2>";
+  } else {
+    // 💣 Mark as viewed
+    viewed.push(pageName);
+    localStorage.setItem("viewedPages", JSON.stringify(viewed));
+  }
+</script>
