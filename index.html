@@ -73,53 +73,75 @@
     <p id="error" style="color:red;"></p>
   </div>
 
-  <!-- 💖 MAIN CONTENT -->
-  <div id="content">
-    <div id="randomContent">
-      Reveal a 
-      one-time-view-message-that-will-self-destruct 
-      from me 💖
-    </div>
 
-    <button onclick="showRandom()">OPEN</button>
-  </div>
+ <script>
+  const pages = [
+    "page1.html",
+    "page2.html",
+    "page3.html"
+  ];
 
-  <script>
-    const pages = [
-      "page1.html",
-      "page2.html",
-      "page3.html"
-    ];
+  function checkPass() {
+    const correct = "112225";
+    const input = document.getElementById("passcode").value;
 
-    function checkPass() {
-      const correct = "112225";
-      const input = document.getElementById("passcode").value;
+    if (input === correct) {
+      handleUnlock();
+    } else {
+      document.getElementById("error").innerText = "Wrong passcode 💔";
+    }
+  }
 
-      if (input === correct) {
-        document.getElementById("lock").style.display = "none";
-        document.getElementById("content").style.display = "block";
-      } else {
-        document.getElementById("error").innerText = "Wrong passcode 💔";
+  function handleUnlock() {
+    const today = new Date().toDateString();
+    const lastOpen = localStorage.getItem("lastOpenDate");
+
+    // 🚫 BLOCK if already opened today
+    if (lastOpen === today) {
+      document.getElementById("error").innerText = "You've already opened today's message 💖";
+      return;
+    }
+
+    goToNextPage();
+  }
+
+  function goToNextPage() {
+    let viewedPages = JSON.parse(localStorage.getItem("viewedPages")) || [];
+    let currentPage = parseInt(localStorage.getItem("currentPage")) || 0;
+
+    // If all pages viewed → reset
+    if (viewedPages.length >= pages.length) {
+      viewedPages = [];
+      currentPage = 0;
+    }
+
+    // Find next unviewed page
+    while (viewedPages.includes(currentPage)) {
+      currentPage++;
+      if (currentPage >= pages.length) currentPage = 0;
+    }
+
+    const nextPage = pages[currentPage];
+
+    // Save progress
+    viewedPages.push(currentPage);
+    localStorage.setItem("viewedPages", JSON.stringify(viewedPages));
+    localStorage.setItem("currentPage", currentPage + 1);
+    localStorage.setItem("lastOpenDate", new Date().toDateString());
+
+    // 🚀 Redirect
+    window.location.href = nextPage;
+  }
+
+  window.onload = function () {
+    const input = document.getElementById("passcode");
+
+    input.focus();
+
+    input.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        checkPass();
       }
-    }
-
-    function showRandom() {
-      const randomPage = pages[Math.floor(Math.random() * pages.length)];
-      window.location.href = randomPage;
-    }
-
-    window.onload = function () {
-      const input = document.getElementById("passcode");
-
-      input.focus();
-
-      input.addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-          checkPass();
-        }
-      });
-    };
-  </script>
-
-</body>
-</html>
+    });
+  };
+</script>
